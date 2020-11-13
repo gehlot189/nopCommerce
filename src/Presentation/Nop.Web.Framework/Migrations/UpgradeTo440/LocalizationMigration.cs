@@ -258,7 +258,7 @@ namespace Nop.Web.Framework.Migrations.UpgradeTo440
                 ["Admin.Configuration.Plugins.ApplyChanges.Progress"] = "Applying changes on plugins...",
                 ["Admin.Configuration.Settings.CustomerUser.ForceMultifactorAuthentication"] = "Force multi-factor authentication",
                 ["Admin.Configuration.Settings.CustomerUser.ForceMultifactorAuthentication.Hint"] = "Force activation of multi-factor authentication for all users (at least one MFA provider must be active).",
-                ["Account.MultiFactorAuthentication.Warning.ForceActivation"] = "Force activation of multi-factor authentication for all users is enabled.",
+                ["Account.MultiFactorAuthentication.Warning.ForceActivation"] = "Enforce multi-factor authentication for all users is enabled.",
             });
 
             // rename locales

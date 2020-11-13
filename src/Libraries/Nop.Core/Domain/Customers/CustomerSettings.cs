@@ -235,12 +235,7 @@ namespace Nop.Core.Domain.Customers
         /// <summary>
         /// Gets or sets interval (in minutes) with which the Delete Guest Task runs
         /// </summary>
-        public int DeleteGuestTaskOlderThanMinutes { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to force multi-factor authentication
-        /// </summary>
-        public bool ForceMultifactorAuthentication { get; set; }
+        public int DeleteGuestTaskOlderThanMinutes { get; set; }        
 
         #region Form fields
 

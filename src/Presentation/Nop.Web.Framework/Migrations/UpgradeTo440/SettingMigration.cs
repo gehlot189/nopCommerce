@@ -28,12 +28,12 @@ namespace Nop.Web.Framework.Migrations.UpgradeTo440
                 settingService.SaveSetting(externalAuthenticationSettings);
             }
 
-            var customerSettings = settingService.LoadSetting<CustomerSettings>();
-            if (!settingService.SettingExists(customerSettings, settings => settings.ForceMultifactorAuthentication))
+            var multiFactorAuthenticationSettings = settingService.LoadSetting<MultiFactorAuthenticationSettings>();
+            if (!settingService.SettingExists(multiFactorAuthenticationSettings, settings => settings.ForceMultifactorAuthentication))
             {
-                customerSettings.ForceMultifactorAuthentication = false;
+                multiFactorAuthenticationSettings.ForceMultifactorAuthentication = false;
 
-                settingService.SaveSetting(customerSettings);
+                settingService.SaveSetting(multiFactorAuthenticationSettings);
             }
         }
 

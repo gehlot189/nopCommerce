@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Data;
+using Nop.Services.Authentication.MultiFactor;
 using Nop.Services.Common;
 using Nop.Services.Customers;
 
@@ -34,27 +35,31 @@ namespace Nop.Web.Framework.Mvc.Filters
         {
             #region Fields
 
-            private readonly CustomerSettings _customerSettings;
             private readonly ICustomerService _customerService;
             private readonly IGenericAttributeService _genericAttributeService;
+            private readonly IMultiFactorAuthenticationPluginManager _multiFactorAuthenticationPluginManager;
             private readonly IUrlHelperFactory _urlHelperFactory;
             private readonly IWorkContext _workContext;
+            private readonly MultiFactorAuthenticationSettings _multiFactorAuthenticationSettings;
 
             #endregion
 
             #region Ctor
 
-            public ForceMultiFactorAuthenticationFilter(CustomerSettings customerSettings,
+            public ForceMultiFactorAuthenticationFilter(
                 ICustomerService customerService,
                 IGenericAttributeService genericAttributeService,
+                IMultiFactorAuthenticationPluginManager multiFactorAuthenticationPluginManager,
                 IUrlHelperFactory urlHelperFactory,
-                IWorkContext workContext)
+                IWorkContext workContext,
+                MultiFactorAuthenticationSettings multiFactorAuthenticationSettings)
             {
-                _customerSettings = customerSettings;
                 _customerService = customerService;
                 _genericAttributeService = genericAttributeService;
+                _multiFactorAuthenticationPluginManager = multiFactorAuthenticationPluginManager;
                 _urlHelperFactory = urlHelperFactory;
                 _workContext = workContext;
+                _multiFactorAuthenticationSettings = multiFactorAuthenticationSettings;
             }
 
             #endregion
@@ -90,7 +95,7 @@ namespace Nop.Web.Framework.Mvc.Filters
                     actionName.Equals("MultiFactorAuthentication", StringComparison.InvariantCultureIgnoreCase)))
                 {
                     //check selected provider of MFA
-                    if (_customerSettings.ForceMultifactorAuthentication)
+                    if (_multiFactorAuthenticationSettings.ForceMultifactorAuthentication && _multiFactorAuthenticationPluginManager.HasActivePlugins())
                     {
                         var selectedProvider = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.SelectedMultiFactorAuthenticationProviderAttribute);
                         if (string.IsNullOrEmpty(selectedProvider))

@@ -556,7 +556,7 @@
     <Value>Settings</Value>
   </LocaleResource>
   <LocaleResource Name="Account.MultiFactorAuthentication.Warning.ForceActivation">
-    <Value>Force activation of multi-factor authentication for all users is enabled.</Value>
+    <Value>Enforce multi-factor authentication for all users is enabled.</Value>
   </LocaleResource>
   <LocaleResource Name="Account.Navigation">
     <Value>My account</Value>

@@ -1048,7 +1048,8 @@ namespace Nop.Web.Areas.Admin.Controllers
             var addressSettings = _settingService.LoadSetting<AddressSettings>(storeScope);
             var dateTimeSettings = _settingService.LoadSetting<DateTimeSettings>(storeScope);
             var externalAuthenticationSettings = _settingService.LoadSetting<ExternalAuthenticationSettings>(storeScope);
-
+            var multiFactorAuthenticationSettings = _settingService.LoadSetting<MultiFactorAuthenticationSettings>(storeScope);
+           
             customerSettings = model.CustomerSettings.ToSettings(customerSettings);
 
             if (customerSettings.UsernameValidationEnabled && customerSettings.UsernameValidationUseRegex)
@@ -1098,6 +1099,9 @@ namespace Nop.Web.Areas.Admin.Controllers
 
             externalAuthenticationSettings.AllowCustomersToRemoveAssociations = model.ExternalAuthenticationSettings.AllowCustomersToRemoveAssociations;
             _settingService.SaveSetting(externalAuthenticationSettings);
+
+            multiFactorAuthenticationSettings = model.MultiFactorAuthenticationSettings.ToSettings(multiFactorAuthenticationSettings);
+            _settingService.SaveSetting(multiFactorAuthenticationSettings);
 
             //activity log
             _customerActivityService.InsertActivity("EditSettings", _localizationService.GetResource("ActivityLog.EditSettings"));
